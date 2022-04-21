@@ -5,6 +5,8 @@ import com.example.auction.AbstractEvent;
 public class AucRegisterd extends AbstractEvent {
 
     private Long aucId;
+
+    private Long aucId2;
     private Long aucPostId;
     private String title;
     private String content;
@@ -21,6 +23,13 @@ public class AucRegisterd extends AbstractEvent {
     }
     public void setAucId(Long aucId) {
         this.aucId = aucId;
+    }
+
+    public Long getAucId2() {
+        return aucId2;
+    }
+    public void setAucId2(Long aucId2) {
+        this.aucId2 = aucId2;
     }
 
     public Long getAucPostId() {

@@ -32,12 +32,18 @@ spring:
                 value:
                   serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
-        event-in:
+        auction-in:
           group: auction
           destination: auction
           contentType: application/json
-        event-out:
+        auction-out:
           destination: auction
+          contentType: application/json
+        payment-out:
+          destination: PaymentRequest
+          contentType: application/json
+        payment-in:
+          destination: PaymentResult
           contentType: application/json
 
 api:
@@ -48,6 +54,14 @@ api:
 
 spring:
   profiles: docker
+  data:
+    rest:
+      base-path: /auction
+  datasource:
+    url: jdbc:mariadb://awesome-shopping-db-mariadb.edu-common:3306/auction
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: twopro
+    password: twopro
   cloud:
     stream:
       kafka:

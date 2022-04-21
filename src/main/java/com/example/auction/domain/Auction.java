@@ -44,6 +44,7 @@ public class Auction {
 
     @PostPersist
     public void onPostPersist(){
+        System.out.println("111222333");
         AucRegisterd aucRegisterd = new AucRegisterd();
         BeanUtils.copyProperties(this, aucRegisterd);
         aucRegisterd.publishAfterCommit();

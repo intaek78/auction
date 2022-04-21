@@ -2,32 +2,37 @@ package com.example.auction.domain;
 
 import com.example.auction.domain.service.AucPaymentRegistered;
 import org.springframework.beans.BeanUtils;
-import com.example.auction.kafka.KafkaPublisher;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="AucPayment_table")
-public class AucPayment {
+@Table(name="Payment_table")
+public class Payment {
 
-    private Long aucPostId;
+    private Long postId;
     private Long aucId;
+
+    private Long id;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long bidId;
     private Long bidId2;
     private Long bid_mem_id;
-    private Long bid_amount;
+    private Long amount;
     private String crt_date;
     private String upt_date;
     private String beAuctioned_date;
     private String beAuctioned_YN;
     private String paymentReq_YN;
     private String proc_GUBUN;
-    private String title;
-    private Long sellerId;
+    private String postTitle;
+    private Long seller;
+    private Long buyer;
     private String paymentGubun;
+    private String postGubun;
+
+    private String paymentResult;
 
     @PostPersist
     public void onPostPersist(){
@@ -50,6 +55,13 @@ public class AucPayment {
         this.aucId = aucId;
     }
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getBidId2() {
         return bidId2;
     }
@@ -57,11 +69,11 @@ public class AucPayment {
         this.bidId2 = bidId2;
     }
 
-    public Long getAucPostId() {
-        return aucPostId;
+    public Long getPostId() {
+        return postId;
     }
-    public void setAucPostId(Long aucPostId) {
-        this.aucPostId = aucPostId;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     public Long getBidId() {
@@ -78,11 +90,11 @@ public class AucPayment {
         this.bid_mem_id = bid_mem_id;
     }
 
-    public Long getBid_amount() {
-        return bid_amount;
+    public Long getAmount() {
+        return amount;
     }
-    public void setBid_amount(Long bid_amount) {
-        this.bid_amount = bid_amount;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     public String getCrt_date() {
@@ -120,18 +132,25 @@ public class AucPayment {
         this.proc_GUBUN = proc_GUBUN;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPostTitle() {
+        return postTitle;
     }
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
     }
 
-    public Long getSellerId() {
-        return sellerId;
+    public Long getSeller() {
+        return seller;
     }
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
+    public void setSeller(Long seller) {
+        this.seller = seller;
+    }
+
+    public Long getBuyer() {
+        return buyer;
+    }
+    public void setBuyer(Long buyer) {
+        this.buyer = buyer;
     }
 
     public String getPaymentReq_YN() {
@@ -146,6 +165,20 @@ public class AucPayment {
     }
     public void setPaymentGubun(String paymentGubun) {
         this.paymentGubun = paymentGubun;
+    }
+
+    public String getPostGubun() {
+        return postGubun;
+    }
+    public void setPostGubun(String postGubun) {
+        this.postGubun = postGubun;
+    }
+
+    public String getPaymentResult() {
+        return paymentResult;
+    }
+    public void setPaymentResult(String paymentResult) {
+        this.paymentResult = paymentResult;
     }
 
 

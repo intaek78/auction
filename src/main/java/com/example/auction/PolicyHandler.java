@@ -1,5 +1,7 @@
 package com.example.auction;
 
+import com.example.auction.domain.Auction;
+import com.example.auction.domain.Payment;
 import com.example.auction.kafka.KafkaProcessor;
 import com.example.auction.domain.repository.AucPaymentRepository;
 import com.example.auction.domain.repository.AuctionRepository;
@@ -83,6 +85,7 @@ public class PolicyHandler{
         }
 
 
+
     }
 
 
@@ -93,6 +96,7 @@ public class PolicyHandler{
         if (aucRegisterd.isMe()) {
             auctionRepository.findByAucId((aucRegisterd.getAucId())).ifPresent(auction -> {
                 //auction.setFinal_bid_mem_id(bidden.getBid_mem_id());
+                System.out.println("aucRegisterd.getAucId(==========%%%%%%%%  "+aucRegisterd.getAucId());
                 auction.setAucId2(aucRegisterd.getAucId()); //임시
                 auctionRepository.save(auction);
             });
@@ -142,7 +146,7 @@ public class PolicyHandler{
         if(aucPaymentRegistered.isMe()){
 
             auctionRepository.findByAucId((aucPaymentRegistered.getAucId())).ifPresent(auction->{
-                if(aucPaymentRegistered.getPaymentGubun().equals("REQ")){
+                if(aucPaymentRegistered.getPaymentGubun().equals("REQUEST_PAYMENT")){
                     auction.setPaymentReq_YN("Y");
                     auction.setStatus("결제완료");
                     auction.setProc_GUBUN("PE");
@@ -171,6 +175,10 @@ public class PolicyHandler{
             });
         }
     }
+
+
+
+
 
 
 }

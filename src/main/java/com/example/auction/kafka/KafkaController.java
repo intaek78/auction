@@ -44,6 +44,15 @@ public class KafkaController {
         kafkaPublisher.sendAucHistoryJson(str2Obj(auction));
     }
 
+    @PostMapping("/auction/registPost")
+    public void pushJsonAuctionPost(@RequestBody String auction) throws ParseException {
+        log.info("pushJsonAuctionPost : {}", auction);
+        System.out.println("pushJsonAuctionPost :  "+ str2Obj(auction));
+
+
+        kafkaPublisher.sendAucPostJson(str2Obj(auction));
+    }
+
 
     public Object str2Obj(String str) throws ParseException {
         JSONParser parser = new JSONParser();

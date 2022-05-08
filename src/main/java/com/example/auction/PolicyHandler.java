@@ -1,7 +1,9 @@
 package com.example.auction;
 
 import com.example.auction.domain.Auction;
+import com.example.auction.domain.AuctionPost;
 import com.example.auction.domain.Payment;
+import com.example.auction.domain.repository.AuctionPostRepository;
 import com.example.auction.kafka.KafkaController;
 import com.example.auction.kafka.KafkaProcessor;
 import com.example.auction.domain.repository.AucPaymentRepository;
@@ -19,6 +21,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +43,9 @@ public class PolicyHandler{
 
     @Autowired
     AucPaymentRepository aucPaymentRepository;
+
+    @Autowired
+    AuctionPostRepository auctionPostRepository;
 
 
     @StreamListener(KafkaProcessor.INPUT)
@@ -71,21 +80,7 @@ public class PolicyHandler{
                 bid.setBidId2(bidden2.getBidId());
                 bidRepository.save(bid);
             });
-
-
-            //List<Auction> auctionOptional = auctionRepository.findByAucId((bidden.getAuc_id()));
-            //System.out.println("111111111111 "+published.getMemId());
-            //System.out.println("memberOptional "+memberOptional.get(0).getMemId());
-            /*for(Auction auction:auctionOptional){
-                //System.out.println("2222222222222");
-                auction.setFinal_bid_mem_id(bidden.getBid_mem_id());
-                auction.setStatus("입찰자:" + bidden.getBid_mem_id() + ", 입찰금액 : " + bidden.getBid_amount() + "원");
-                auctionRepository.save(auction);
-            }*/
         }
-
-
-
     }
 
 
@@ -101,6 +96,27 @@ public class PolicyHandler{
                 auctionRepository.save(auction);
             });
 
+        }
+    }
+
+    //경매글 입력
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverAucRegistered2_(@Payload AucRegisterd aucRegisterd2) {
+        System.out.println("==========%%%%%%%%%%%%Polishhandler aucRegisterd2 start=========");
+        if (aucRegisterd2.isMe()) {
+            AuctionPost auctionPost = new AuctionPost();
+            auctionPost.setAucId2(aucRegisterd2.getAucId());
+            auctionPost.setAucPostId(aucRegisterd2.getAucPostId());
+            auctionPost.setTitle(aucRegisterd2.getTitle());
+            auctionPost.setContent(aucRegisterd2.getContent());
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            cal.add(Calendar.MONTH, 6);
+            auctionPost.setCrt_date(df.format(cal.getTime()));
+
+            auctionPostRepository.save(auctionPost);
         }
     }
 

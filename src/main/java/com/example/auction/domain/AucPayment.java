@@ -40,10 +40,6 @@ public class AucPayment {
         BeanUtils.copyProperties(this, aucPaymentRegistered);
         aucPaymentRegistered.publishAfterCommit();
 
-        AucPaymentRegistered aucPaymentRegistered2 = new AucPaymentRegistered();
-        BeanUtils.copyProperties(this, aucPaymentRegistered2);
-        aucPaymentRegistered2.publishAfterCommit();
-
     }
 
 

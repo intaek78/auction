@@ -1,22 +1,19 @@
 package com.example.auction.domain;
 
-import javax.persistence.*;
-
 import com.example.auction.domain.service.AucRegisterd;
 import com.example.auction.domain.service.AuctionCancelled;
 import com.example.auction.domain.service.AuctionCompleted;
 import org.springframework.beans.BeanUtils;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name="Auction_table")
-public class Auction {
+@Table(name="AuctionPost_table")
+public class AuctionPost {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long aucId;
+    private Long postId;
     private Long aucId2;
     private Long aucPostId;
     private String title;
@@ -45,45 +42,23 @@ public class Auction {
 
     @PostPersist
     public void onPostPersist(){
-        System.out.println("111222333");
-        AucRegisterd aucRegisterd = new AucRegisterd();
-        BeanUtils.copyProperties(this, aucRegisterd);
-        if (!this.proc_GUBUN.equals("PAYMENT REJECT")) {
-            aucRegisterd.publishAfterCommit();
-        }
-
     }
 
     @PostUpdate
     public void onPostUpdate(){
-        //경매취소/완료 처리
-        AuctionCancelled auctionCancelled = new AuctionCancelled();
-        BeanUtils.copyProperties(this, auctionCancelled);
-
-        AuctionCompleted auctionCompleted = new AuctionCompleted();
-        BeanUtils.copyProperties(this, auctionCompleted);
-        System.out.println("this.proc_GUBUN====>"+this.proc_GUBUN);
-        if (this.proc_GUBUN.equals("PAYMENT CANCELED")) {
-            auctionCancelled.publishAfterCommit();
-        }else if(this.proc_GUBUN.equals("E")){
-            auctionCompleted.publishAfterCommit();
-        }
 
     }
 
     @PreRemove
     public void onPreRemove(){
-        AuctionCancelled auctionCancelled = new AuctionCancelled();
-        BeanUtils.copyProperties(this, auctionCancelled);
-        auctionCancelled.publishAfterCommit();
     }
 
 
-    public Long getAucId() {
-        return aucId;
+    public Long getPostId() {
+        return postId;
     }
-    public void setAucId(Long aucId) {
-        this.aucId = aucId;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     public Long getAucId2() {

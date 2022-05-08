@@ -31,11 +31,18 @@ public class KafkaController {
         log.info("전송 : {}", auction);
         //AucPayment aucPayment = new AucPayment();
         log.info("tran 1 : {}", auction);
-        System.out.println("tran 2  "+ str2Obj(auction));
+        System.out.println("sendPaymentRequest  "+ str2Obj(auction));
 
         kafkaPublisher.sendAuctionJson(str2Obj(auction));
     }
 
+    @PostMapping("/auction/pushhistory")
+    public void pushJsonHistory(@RequestBody String auction) throws ParseException {
+        log.info("pushJsonHistory : {}", auction);
+        System.out.println("sendHistoryRequest  "+ str2Obj(auction));
+
+        kafkaPublisher.sendAucHistoryJson(str2Obj(auction));
+    }
 
 
     public Object str2Obj(String str) throws ParseException {

@@ -12,11 +12,15 @@ public interface KafkaProcessor {
     @Output(PAYMENT_OUTPUT)
     MessageChannel paymentOutboundTopic();
 
-    @Output(PAYMENT_INPUT)
+    @Input(PAYMENT_INPUT)
     MessageChannel paymentInboundTopic();
 
     String INPUT = "auction-in";
     String OUTPUT = "auction-out";
+
+    String HISTORY_OUTPUT = "history-out";
+    @Output(HISTORY_OUTPUT)
+    MessageChannel historyOutboundTopic();
 
     @Input(INPUT)
     SubscribableChannel inboundTopic();

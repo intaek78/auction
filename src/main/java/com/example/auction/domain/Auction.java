@@ -36,6 +36,7 @@ public class Auction {
 
     private String paymentReq_YN;
 
+
     @PrePersist
     public void onPrePersist(){
         proc_GUBUN = "R";

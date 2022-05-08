@@ -2,6 +2,7 @@ package com.example.auction;
 
 import com.example.auction.domain.Auction;
 import com.example.auction.domain.Payment;
+import com.example.auction.kafka.KafkaController;
 import com.example.auction.kafka.KafkaProcessor;
 import com.example.auction.domain.repository.AucPaymentRepository;
 import com.example.auction.domain.repository.AuctionRepository;
@@ -10,7 +11,6 @@ import com.example.auction.domain.service.AucPaymentRegistered;
 import com.example.auction.domain.service.AucRegisterd;
 import com.example.auction.domain.service.BeAuctioned;
 import com.example.auction.domain.service.Bidden;
-import com.example.auction.kafka.KafkaProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -140,27 +140,21 @@ public class PolicyHandler{
         }
     }
 
+
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverAucPaymentRegisted_(@Payload AucPaymentRegistered aucPaymentRegistered){
 
         if(aucPaymentRegistered.isMe()){
 
             auctionRepository.findByAucId((aucPaymentRegistered.getAucId())).ifPresent(auction->{
-                if(aucPaymentRegistered.getPaymentGubun().equals("REQUEST_PAYMENT")){
-                    auction.setPaymentReq_YN("Y");
-                    auction.setStatus("결제완료");
-                    auction.setProc_GUBUN("PE");
-                }else if(aucPaymentRegistered.getPaymentGubun().equals("CANCEL")){
-                    auction.setStatus("결제취소");
-                    auction.setProc_GUBUN("PC");
-                    auction.setPaymentReq_YN("C");
-                }else if(aucPaymentRegistered.getPaymentGubun().equals("END")){
+                if(aucPaymentRegistered.getPaymentGubun().equals("END")){
                     auction.setStatus("판매종료");
                     auction.setProc_GUBUN("E");
                     auction.setPaymentReq_YN("E");
                 }
                 auctionRepository.save(auction);
             });
+
         }
     }
 
@@ -175,7 +169,6 @@ public class PolicyHandler{
             });
         }
     }
-
 
 
 

@@ -29,6 +29,10 @@ public class AucPayment {
     private Long sellerId;
     private String paymentGubun;
 
+    private String paymentResult;
+
+
+
     @PostPersist
     public void onPostPersist(){
 
@@ -146,6 +150,13 @@ public class AucPayment {
     }
     public void setPaymentGubun(String paymentGubun) {
         this.paymentGubun = paymentGubun;
+    }
+
+    public String getPaymentResult() {
+        return paymentResult;
+    }
+    public void setPaymentResult(String paymentResult) {
+        this.paymentResult = paymentResult;
     }
 
 

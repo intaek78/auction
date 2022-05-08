@@ -16,6 +16,8 @@ public class AucPaymentRegistered extends AbstractEvent {
     private String paymentReq_YN;
     private String paymentGubun;
 
+    private String paymentResult;
+
 
 
 
@@ -92,5 +94,12 @@ public class AucPaymentRegistered extends AbstractEvent {
     }
     public void setPaymentGubun(String paymentGubun) {
         this.paymentGubun = paymentGubun;
+    }
+
+    public String getPaymentResult() {
+        return paymentResult;
+    }
+    public void setPaymentResult(String paymentResult) {
+        this.paymentResult = paymentResult;
     }
 }

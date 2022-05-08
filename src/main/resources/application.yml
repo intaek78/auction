@@ -45,6 +45,9 @@ spring:
         payment-in:
           destination: PaymentResult
           contentType: application/json
+        history-out:
+          destination: AuctionHistory
+          contentType: application/json
 
 api:
   auction:

@@ -35,6 +35,8 @@ public class Auction {
     private String beAuctioned_YN_Auc;
 
     private String paymentReq_YN;
+    private String aucStartDate;
+    private String aucEndDate;
 
 
     @PrePersist
@@ -196,6 +198,20 @@ public class Auction {
     }
     public void setPaymentReq_YN(String paymentReq_YN) {
         this.paymentReq_YN = paymentReq_YN;
+    }
+
+    public String getAucStartDate() {
+        return aucStartDate;
+    }
+    public void setAucStartDate(String aucStartDate) {
+        this.aucStartDate = aucStartDate;
+    }
+
+    public String getAucEndDate() {
+        return aucEndDate;
+    }
+    public void setAucEndDate(String aucEndDate) {
+        this.aucEndDate = aucEndDate;
     }
 
 

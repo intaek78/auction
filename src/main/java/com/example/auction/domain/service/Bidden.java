@@ -8,9 +8,9 @@ public class Bidden extends AbstractEvent {
     private Long aucPostId;
     private Long bidId;
     private Long bidId2;
-    private Long bid_mem_id;
-    private Long bid_amount;
-    private String proc_GUBUN;
+    private Long bidMemId;
+    private Long bidAmount;
+    private String procGUBUN;
 
     public Long getAucId() {
         return aucId;
@@ -36,24 +36,24 @@ public class Bidden extends AbstractEvent {
         this.bidId2 = bidId2;
     }
 
-    public Long getBid_amount() {
-        return bid_amount;
+    public Long getBidAmount() {
+        return bidAmount;
     }
-    public void setBid_amount(Long bid_amount) {
-        this.bid_amount = bid_amount;
-    }
-
-    public Long getBid_mem_id() {
-        return bid_mem_id;
-    }
-    public void setBid_mem_id(Long bid_mem_id) {
-        this.bid_mem_id = bid_mem_id;
+    public void setBidAmount(Long bidAmount) {
+        this.bidAmount = bidAmount;
     }
 
-    public String getProc_GUBUN() {
-        return proc_GUBUN;
+    public Long getBidMemId() {
+        return bidMemId;
     }
-    public void setProc_GUBUN(String proc_GUBUN) {
-        this.proc_GUBUN = proc_GUBUN;
+    public void setBidMemId(Long bidMemId) {
+        this.bidMemId = bidMemId;
+    }
+
+    public String getProcGUBUN() {
+        return procGUBUN;
+    }
+    public void setProcGUBUN(String procGUBUN) {
+        this.procGUBUN = procGUBUN;
     }
 }

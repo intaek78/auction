@@ -1,10 +1,7 @@
 package com.example.auction.kafka;
 
-import com.example.auction.domain.Auction;
-import com.example.auction.domain.service.AucPaymentRegistered;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.JSONObject;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;

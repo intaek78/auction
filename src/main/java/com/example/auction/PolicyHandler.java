@@ -30,10 +30,6 @@ import java.util.Optional;
 
 @Service
 public class PolicyHandler{
-    @StreamListener(KafkaProcessor.INPUT)
-    public void onStringEventListener(@Payload String eventString){
-
-    }
 
     @Autowired
     AuctionRepository auctionRepository;
@@ -49,33 +45,22 @@ public class PolicyHandler{
 
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverBidRegisted_(@Payload Bidden bidden){
+    public void wheneverBidRegisted(@Payload Bidden bidden){
 
         if(bidden.isMe()){
 
             auctionRepository.findByAucId((bidden.getAucId())).ifPresent(auction->{
-                auction.setProc_GUBUN("B");
-                auction.setStatus("<입찰> Buyer:" + bidden.getBid_mem_id() + ", 금액:" + bidden.getBid_amount());
+                auction.setProcGUBUN("B");
+                auction.setStatus("<입찰> Buyer:" + bidden.getBidMemId() + ", 금액:" + bidden.getBidAmount());
                 auctionRepository.save(auction);
             });
-            //List<Auction> auctionOptional = auctionRepository.findByAucId((bidden.getAuc_id()));
-            //System.out.println("111111111111 "+published.getMemId());
-            //System.out.println("memberOptional "+memberOptional.get(0).getMemId());
-            /*for(Auction auction:auctionOptional){
-                //System.out.println("2222222222222");
-                auction.setFinal_bid_mem_id(bidden.getBid_mem_id());
-                auction.setStatus("입찰자:" + bidden.getBid_mem_id() + ", 입찰금액 : " + bidden.getBid_amount() + "원");
-                auctionRepository.save(auction);
-            }*/
         }
     }
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverBidRegisted2_(@Payload Bidden bidden2){
+    public void wheneverBidRegisted2(@Payload Bidden bidden2){
 
         if(bidden2.isMe()){
-            System.out.println("==========%%%%%%%%%%%%bidden getBidId start=========");
-            System.out.println("bidden.getBidId()===>"+bidden2.getBidId());
             bidRepository.findByBidId((bidden2.getBidId())).ifPresent(bid->{
                 bid.setBidId2(bidden2.getBidId());
                 bidRepository.save(bid);
@@ -86,12 +71,9 @@ public class PolicyHandler{
 
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverAucRegistered_(@Payload AucRegisterd aucRegisterd) {
-        System.out.println("==========%%%%%%%%%%%%Polishhandler aucRegisterd start=========");
+    public void wheneverAucRegistered(@Payload AucRegisterd aucRegisterd) {
         if (aucRegisterd.isMe()) {
             auctionRepository.findByAucId((aucRegisterd.getAucId())).ifPresent(auction -> {
-                //auction.setFinal_bid_mem_id(bidden.getBid_mem_id());
-                System.out.println("aucRegisterd.getAucId(==========%%%%%%%%  "+aucRegisterd.getAucId());
                 auction.setAucId2(aucRegisterd.getAucId()); //임시
                 auctionRepository.save(auction);
             });
@@ -101,8 +83,7 @@ public class PolicyHandler{
 
     //경매글 입력
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverAucRegistered2_(@Payload AucRegisterd aucRegisterd2) {
-        System.out.println("==========%%%%%%%%%%%%Polishhandler aucRegisterd2 start=========");
+    public void wheneverAucRegistered2(@Payload AucRegisterd aucRegisterd2) {
         if (aucRegisterd2.isMe()) {
             AuctionPost auctionPost = new AuctionPost();
             auctionPost.setAucId2(aucRegisterd2.getAucId());
@@ -114,59 +95,46 @@ public class PolicyHandler{
             cal.setTime(new Date());
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             cal.add(Calendar.MONTH, 6);
-            auctionPost.setCrt_date(df.format(cal.getTime()));
+            auctionPost.setCrtDate(df.format(cal.getTime()));
 
             auctionPostRepository.save(auctionPost);
         }
     }
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverBeAuctioned_(@Payload BeAuctioned beAuctioned){
-        System.out.println("==========%%%%%%%%%%%%Polishhandler beAuctioned start=========");
+    public void wheneverBeAuctioned(@Payload BeAuctioned beAuctioned){
         //낙찰자/일시/금액 수정
         if(beAuctioned.isMe()){
-            System.out.println("getAucId11========"+beAuctioned.getAucId());
             auctionRepository.findByAucId((beAuctioned.getAucId())).ifPresent(auction->{
-                System.out.println("==========%%%%%%%%%%%%Polishhandler beAuctioned getAucId start=========");
-                //auction.setFinal_bid_mem_id(bidden.getBid_mem_id());
-                auction.setBeAuctioned_date(beAuctioned.getBeAuctioned_date()); //임시
-                auction.setBuyerId(beAuctioned.getAuctioned_mem_id());
-                auction.setBeAuctioned_amount(beAuctioned.getBeAuctioned_amount());
+                auction.setBeAuctionedDate(beAuctioned.getBeAuctionedDate()); //임시
+                auction.setBuyerId(beAuctioned.getAuctionedMemId());
+                auction.setBeAuctionedAmount(beAuctioned.getBeAuctionedAmount());
                 auction.setStatus("낙찰");
-                auction.setProc_GUBUN("S");
-                auction.setBeAuctioned_YN_Auc("Y");
+                auction.setProcGUBUN("S");
+                auction.setBeAuctionedYnAuc("Y");
                 auctionRepository.save(auction);
             });
 
             bidRepository.findByBidId((beAuctioned.getBidId())).ifPresent(bid->{
-                System.out.println("==========%%%%%%%%%%%%Polishhandler beAuctioned findByBidId start=========");
-                System.out.println("bidId========"+beAuctioned.getBidId());
-                bid.setBeAuctioned_date(beAuctioned.getBeAuctioned_date());
-                bid.setBeAuctioned_YN("Y");
+                bid.setBeAuctionedDate(beAuctioned.getBeAuctionedDate());
+                bid.setBeAuctionedYN("Y");
                 bidRepository.save(bid);
             });
-
-            /*List<Bid> bids = bidRepository..findBybid_id(beAuctioned.getBidId());
-            for(Bid bid:bids ){
-                bid.setBeAuctioned_date(beAuctioned.getBeAuctioned_date());
-                bid.setBeAuctioned_YN("Y");
-                bidRepository.save(bid);
-            }*/
 
         }
     }
 
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverAucPaymentRegisted_(@Payload AucPaymentRegistered aucPaymentRegistered){
+    public void wheneverAucPaymentRegisted(@Payload AucPaymentRegistered aucPaymentRegistered){
 
         if(aucPaymentRegistered.isMe()){
 
             auctionRepository.findByAucId((aucPaymentRegistered.getAucId())).ifPresent(auction->{
                 if(aucPaymentRegistered.getPaymentGubun().equals("END")){
                     auction.setStatus("판매종료");
-                    auction.setProc_GUBUN("E");
-                    auction.setPaymentReq_YN("E");
+                    auction.setProcGUBUN("E");
+                    auction.setPaymentReqYN("E");
                 }
                 auctionRepository.save(auction);
             });
@@ -175,7 +143,7 @@ public class PolicyHandler{
     }
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverAucPaymentRegisted2_(@Payload AucPaymentRegistered aucPaymentRegistered2){
+    public void wheneverAucPaymentRegisted2(@Payload AucPaymentRegistered aucPaymentRegistered2){
 
         if(aucPaymentRegistered2.isMe()){
 

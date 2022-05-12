@@ -1,10 +1,5 @@
 package com.example.auction.domain;
 
-import com.example.auction.domain.service.AucRegisterd;
-import com.example.auction.domain.service.AuctionCancelled;
-import com.example.auction.domain.service.AuctionCompleted;
-import org.springframework.beans.BeanUtils;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,55 +10,40 @@ public class AuctionPost {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long postId;
     private Long aucId2;
-    private Long aucPostId;
     private String title;
+    private Long aucPostId;
     private String content;
     private String status;
-    private Long auc_start_amount;
-    private String pay_mth;
-    private String crt_date;
-    private String upt_date;
+    private String crtDate;
+    private Long aucStartAmount;
+    private String payMth;
+    private String uptDate;
     private Long buyerId;
+    private String procGUBUN;
     private Long sellerId;
-    private String proc_GUBUN;
-    private String beAuctioned_date;
-    private Long beAuctioned_amount;
+    private String beAuctionedDate;
+    private Long beAuctionedAmount;
+    private String paymentReqYN;
+    private String beAuctionedYnAuc;
 
-    private String beAuctioned_YN_Auc;
 
-    private String paymentReq_YN;
 
 
     @PrePersist
     public void onPrePersist(){
-        proc_GUBUN = "R";
+        procGUBUN = "R";
     }
-
-
-    @PostPersist
-    public void onPostPersist(){
-    }
-
-    @PostUpdate
-    public void onPostUpdate(){
-
-    }
-
-    @PreRemove
-    public void onPreRemove(){
-    }
-
 
     public Long getPostId() {
         return postId;
+    }
+    public Long getAucId2() {
+        return aucId2;
     }
     public void setPostId(Long postId) {
         this.postId = postId;
     }
 
-    public Long getAucId2() {
-        return aucId2;
-    }
     public void setAucId2(Long aucId2) {
         this.aucId2 = aucId2;
     }
@@ -71,57 +51,59 @@ public class AuctionPost {
     public Long getAucPostId() {
         return aucPostId;
     }
+    public String getTitle() {
+        return title;
+    }
     public void setAucPostId(Long aucPostId) {
         this.aucPostId = aucPostId;
     }
 
-    public String getTitle() {
-        return title;
-    }
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
     }
     public void setContent(String content) {
         this.content = content;
     }
-
-    public String getStatus() {
-        return status;
+    public String getContent() {
+        return content;
     }
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public Long getAuc_start_amount() {
-        return auc_start_amount;
+    public String getStatus() {
+        return status;
     }
-    public void setAuc_start_amount(Long auc_start_amount) {
-        this.auc_start_amount = auc_start_amount;
-    }
-
-    public String getPay_mth() {
-        return pay_mth;
-    }
-    public void setPay_mth(String pay_mth) {
-        this.pay_mth = pay_mth;
+    public void setAucStartAmount(Long aucStartAmount) {
+        this.aucStartAmount = aucStartAmount;
     }
 
-    public String getCrt_date() {
-        return crt_date;
-    }
-    public void setCrt_date(String crt_date) {
-        this.crt_date = crt_date;
+    public Long getAucStartAmount() {
+        return aucStartAmount;
     }
 
-    public String getUpt_date() {
-        return upt_date;
+    public String getPayMth() {
+        return payMth;
     }
-    public void setUpt_date(String upt_date) {
-        this.upt_date = upt_date;
+    public void setPayMth(String payMth) {
+        this.payMth = payMth;
+    }
+    public String getCrtDate() {
+        return crtDate;
+    }
+
+
+    public void setCrtDate(String crtDate) {
+        this.crtDate = crtDate;
+    }
+    public void setUptDate(String uptDate) {
+        this.uptDate = uptDate;
+    }
+
+    public String getUptDate() {
+        return uptDate;
+    }
+    public Long getSellerId() {
+        return sellerId;
     }
 
     public Long getBuyerId() {
@@ -131,46 +113,43 @@ public class AuctionPost {
         this.buyerId = buyerId;
     }
 
-    public Long getSellerId() {
-        return sellerId;
-    }
+
     public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
-
-    public String getProc_GUBUN() {
-        return proc_GUBUN;
-    }
-    public void setProc_GUBUN(String proc_GUBUN) {
-        this.proc_GUBUN = proc_GUBUN;
+    public void setProcGUBUN(String procGUBUN) {
+        this.procGUBUN = procGUBUN;
     }
 
-    public String getBeAuctioned_date() {
-        return beAuctioned_date;
-    }
-    public void setBeAuctioned_date(String beAuctioned_date) {
-        this.beAuctioned_date = beAuctioned_date;
+    public String getProcGUBUN() {
+        return procGUBUN;
     }
 
-    public Long getBeAuctioned_amount() {
-        return beAuctioned_amount;
+
+    public String getBeAuctionedDate() {
+        return beAuctionedDate;
     }
-    public void setBeAuctioned_amount(Long beAuctioned_amount) {
-        this.beAuctioned_amount = beAuctioned_amount;
+    public void setBeAuctionedDate(String beAuctionedDate) {
+        this.beAuctionedDate = beAuctionedDate;
+    }
+    public void setBeAuctionedAmount(Long beAuctionedAmount) {
+        this.beAuctionedAmount = beAuctionedAmount;
+    }
+    public Long getBeAuctionedAmount() {
+        return beAuctionedAmount;
     }
 
-    public String getBeAuctioned_YN_Auc() {
-        return beAuctioned_YN_Auc;
+    public String getBeAuctionedYnAuc() {
+        return beAuctionedYnAuc;
     }
-    public void setBeAuctioned_YN_Auc(String beAuctioned_YN_Auc) {
-        this.beAuctioned_YN_Auc = beAuctioned_YN_Auc;
+    public String getPaymentReqYN() {
+        return paymentReqYN;
     }
-
-    public String getPaymentReq_YN() {
-        return paymentReq_YN;
+    public void setBeAuctionedYnAuc(String beAuctionedYnAuc) {
+        this.beAuctionedYnAuc = beAuctionedYnAuc;
     }
-    public void setPaymentReq_YN(String paymentReq_YN) {
-        this.paymentReq_YN = paymentReq_YN;
+    public void setPaymentReqYN(String paymentReqYN) {
+        this.paymentReqYN = paymentReqYN;
     }
 
 

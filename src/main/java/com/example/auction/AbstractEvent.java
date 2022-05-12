@@ -31,7 +31,7 @@ public class AbstractEvent {
         try {
             json = objectMapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("JSON format exception", e);
+            e.printStackTrace();
         }
 
         return json;

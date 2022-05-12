@@ -3,7 +3,6 @@ package com.example.auction;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -26,4 +25,4 @@ import org.springframework.stereotype.Component;
     response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
     chain.doFilter(req, res); }
 
-  @Override public void init(FilterConfig filterConfig) { } @Override public void destroy() { } }
+}

@@ -29,35 +29,27 @@ public class KafkaController {
     @PostMapping("/auction/push")
     public void pushJsonTest(@RequestBody String auction) throws ParseException {
         log.info("전송 : {}", auction);
-        //AucPayment aucPayment = new AucPayment();
-        log.info("tran 1 : {}", auction);
-        System.out.println("sendPaymentRequest  "+ str2Obj(auction));
+        log.info("sendPaymentRequest  "+ str2Obj(auction));
 
         kafkaPublisher.sendAuctionJson(str2Obj(auction));
     }
 
     @PostMapping("/auction/pushhistory")
     public void pushJsonHistory(@RequestBody String auction) throws ParseException {
-        log.info("pushJsonHistory : {}", auction);
-        System.out.println("sendHistoryRequest  "+ str2Obj(auction));
-
+        log.info("sendHistoryRequest : {}", str2Obj(auction));
         kafkaPublisher.sendAucHistoryJson(str2Obj(auction));
     }
 
     @PostMapping("/auction/registPost")
     public void pushJsonAuctionPost(@RequestBody String auction) throws ParseException {
-        log.info("pushJsonAuctionPost : {}", auction);
-        System.out.println("pushJsonAuctionPost :  "+ str2Obj(auction));
-
-
+        log.info("pushJsonAuctionPost : {}", str2Obj(auction));
         kafkaPublisher.sendAucPostJson(str2Obj(auction));
     }
 
 
     public Object str2Obj(String str) throws ParseException {
         JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(str);
-        return jsonObject;
+        return parser.parse(str);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.auction.domain;
 
 import com.example.auction.domain.service.BeAuctioned;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
@@ -9,29 +10,31 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+@Slf4j
 @Entity
 @Table(name="Beauction_table")
 public class Beauction {
 
     private Long aucPostId;
     private Long aucId;
+    private String procGUBUN;
     private Long bidId;
-
+    private String beAuctionedYN;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long beauction_id;
-    private Long bid_mem_id;
-    //private Long beAuctioned_amount;
-    private String crt_date;
-    private String upt_date;
-    private String beAuctioned_date;
-    private String beAuctioned_YN;
-    private String proc_GUBUN;
+    private Long beauctionId;
+    private Long bidMemId;
+    private String beAuctionedDate;
+    private String crtDate;
+    private String uptDate;
+
+
+
 
 
     @PostPersist
     public void onPostPersist(){
-        System.out.println("==========Beauction PostPersist start==========");
+        log.info("==========Beauction PostPersist start==========");
         //낙찰자id 및 낙찰일시 수정
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -40,27 +43,14 @@ public class Beauction {
         BeAuctioned beAuctioned = new BeAuctioned();
         BeanUtils.copyProperties(this, beAuctioned);
         beAuctioned.setStatus("Sold");
-        beAuctioned.setAuctioned_mem_id(beAuctioned.getAuctioned_mem_id());
-        beAuctioned.setBeAuctioned_date(df.format(cal.getTime()));
-        beAuctioned.setBeAuctioned_amount(beAuctioned.getBeAuctioned_amount());
+        beAuctioned.setAuctionedMemId(beAuctioned.getAuctionedMemId());
+        beAuctioned.setBeAuctionedDate(df.format(cal.getTime()));
+        beAuctioned.setBeAuctionedAmount(beAuctioned.getBeAuctionedAmount());
         beAuctioned.setBidId(beAuctioned.getBidId());
-        beAuctioned.setProc_GUBUN("S");
+        beAuctioned.setProcGUBUN("S");
         beAuctioned.publishAfterCommit();
     }
 
-    @PostUpdate
-    public void onPostUpdate(){
-
-    }
-
-    @PrePersist
-    public void onPrePersis(){
-        /*try {
-            Thread.currentThread().sleep((long) (400 + Math.random() * 220));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-    }
 
     public Long getAucId() {
         return aucId;
@@ -83,56 +73,52 @@ public class Beauction {
         this.aucPostId = aucPostId;
     }
 
-    public Long getBeauction_id() {
-        return beauction_id;
+    public Long getBeauctionId() {
+        return beauctionId;
     }
-    public void setBeauction_id(Long beauction_id) {
-        this.beauction_id = beauction_id;
-    }
-
-    public Long getBid_mem_id() {
-        return bid_mem_id;
-    }
-    public void setBid_mem_id(Long bid_mem_id) {
-        this.bid_mem_id = bid_mem_id;
+    public void setBeauctionId(Long beauctionId) {
+        this.beauctionId = beauctionId;
     }
 
-    //public Long getBeAuctioned_amount() {        return beAuctioned_amount;     }
-    //public void setBeAuctioned_amount(Long beAuctioned_amount) {         this.beAuctioned_amount = beAuctioned_amount;     }
-
-    public String getCrt_date() {
-        return crt_date;
+    public Long getBidMemId() {
+        return bidMemId;
     }
-    public void setCrt_date(String crt_date) {
-        this.crt_date = crt_date;
+    public void setBidMemId(Long bidMemId) {
+        this.bidMemId = bidMemId;
     }
-
-    public String getUpt_date() {
-        return upt_date;
+    public String getCrtDate() {
+        return crtDate;
     }
-    public void setUpt_date(String upt_date) {
-        this.upt_date = upt_date;
+    public void setCrtDate(String crtDate) {
+        this.crtDate = crtDate;
     }
 
-    public String getBeAuctioned_date() {
-        return beAuctioned_date;
+    public String getBeAuctionedDate() {
+        return beAuctionedDate;
     }
-    public void setBeAuctioned_date(String beAuctioned_date) {
-        this.beAuctioned_date = beAuctioned_date;
-    }
-
-    public String getBeAuctioned_YN() {
-        return beAuctioned_YN;
-    }
-    public void setBeAuctioned_YN(String beAuctioned_YN) {
-        this.beAuctioned_YN = beAuctioned_YN;
+    public void setBeAuctionedDate(String beAuctionedDate) {
+        this.beAuctionedDate = beAuctionedDate;
     }
 
-    public String getProc_GUBUN() {
-        return proc_GUBUN;
+    public String getBeAuctionedYN() {
+        return beAuctionedYN;
     }
-    public void setProc_GUBUN(String proc_GUBUN) {
-        this.proc_GUBUN = proc_GUBUN;
+    public void setBeAuctionedYN(String beAuctionedYN) {
+        this.beAuctionedYN = beAuctionedYN;
+    }
+
+    public String getProcGUBUN() {
+        return procGUBUN;
+    }
+    public void setProcGUBUN(String procGUBUN) {
+        this.procGUBUN = procGUBUN;
+    }
+
+    public String getUptDate() {
+        return uptDate;
+    }
+    public void setUptDate(String uptDate) {
+        this.uptDate = uptDate;
     }
 
 

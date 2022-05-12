@@ -2,7 +2,6 @@ package com.example.auction.domain;
 
 import com.example.auction.domain.service.AucPaymentRegistered;
 import org.springframework.beans.BeanUtils;
-import com.example.auction.kafka.KafkaPublisher;
 
 import javax.persistence.*;
 
@@ -10,25 +9,24 @@ import javax.persistence.*;
 @Table(name="AucPayment_table")
 public class AucPayment {
 
-    private Long aucPostId;
     private Long aucId;
+    private Long aucPostId;
+    private Long bidMemId;
+    private String crtDate;
+    private String beAuctionedDate;
+    private String paymentReqYN;
+    private String title;
+    private Long sellerId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long bidId;
     private Long bidId2;
-    private Long bid_mem_id;
-    private Long bid_amount;
-    private String crt_date;
-    private String upt_date;
-    private String beAuctioned_date;
-    private String beAuctioned_YN;
-    private String paymentReq_YN;
-    private String proc_GUBUN;
-    private String title;
-    private Long sellerId;
+    private Long bidAmount;
+    private String uptDate;
+    private String beAuctionedYN;
+    private String procGUBUN;
     private String paymentGubun;
-
     private String paymentResult;
 
 
@@ -43,85 +41,84 @@ public class AucPayment {
     }
 
 
-    public Long getAucId() {
-        return aucId;
-    }
+
     public void setAucId(Long aucId) {
         this.aucId = aucId;
+    }
+    public Long getAucId() {
+        return aucId;
     }
 
     public Long getBidId2() {
         return bidId2;
     }
-    public void setBidId2(Long bidId2) {
-        this.bidId2 = bidId2;
-    }
-
     public Long getAucPostId() {
         return aucPostId;
     }
-    public void setAucPostId(Long aucPostId) {
-        this.aucPostId = aucPostId;
+    public void setBidId2(Long bidId2) {
+        this.bidId2 = bidId2;
     }
-
+    public void setBidMemId(Long bidMemId) {
+        this.bidMemId = bidMemId;
+    }
     public Long getBidId() {
         return bidId;
+    }
+    public void setAucPostId(Long aucPostId) {
+        this.aucPostId = aucPostId;
     }
     public void setBidId(Long bidId) {
         this.bidId = bidId;
     }
 
-    public Long getBid_mem_id() {
-        return bid_mem_id;
-    }
-    public void setBid_mem_id(Long bid_mem_id) {
-        this.bid_mem_id = bid_mem_id;
+    public Long getBidMemId() {
+        return bidMemId;
     }
 
-    public Long getBid_amount() {
-        return bid_amount;
+    public String getCrtDate() {
+        return crtDate;
     }
-    public void setBid_amount(Long bid_amount) {
-        this.bid_amount = bid_amount;
+    public Long getBidAmount() {
+        return bidAmount;
     }
-
-    public String getCrt_date() {
-        return crt_date;
-    }
-    public void setCrt_date(String crt_date) {
-        this.crt_date = crt_date;
+    public void setBidAmount(Long bidAmount) {
+        this.bidAmount = bidAmount;
     }
 
-    public String getUpt_date() {
-        return upt_date;
-    }
-    public void setUpt_date(String upt_date) {
-        this.upt_date = upt_date;
+
+    public void setCrtDate(String crtDate) {
+        this.crtDate = crtDate;
     }
 
-    public String getBeAuctioned_date() {
-        return beAuctioned_date;
+    public String getUptDate() {
+        return uptDate;
     }
-    public void setBeAuctioned_date(String beAuctioned_date) {
-        this.beAuctioned_date = beAuctioned_date;
+    public String getBeAuctionedDate() {
+        return beAuctionedDate;
     }
-
-    public String getBeAuctioned_YN() {
-        return beAuctioned_YN;
-    }
-    public void setBeAuctioned_YN(String beAuctioned_YN) {
-        this.beAuctioned_YN = beAuctioned_YN;
+    public void setUptDate(String uptDate) {
+        this.uptDate = uptDate;
     }
 
-    public String getProc_GUBUN() {
-        return proc_GUBUN;
+    public void setBeAuctionedDate(String beAuctionedDate) {
+        this.beAuctionedDate = beAuctionedDate;
     }
-    public void setProc_GUBUN(String proc_GUBUN) {
-        this.proc_GUBUN = proc_GUBUN;
+    public void setBeAuctionedYN(String beAuctionedYN) {
+        this.beAuctionedYN = beAuctionedYN;
     }
 
+    public String getBeAuctionedYN() {
+        return beAuctionedYN;
+    }
+
+    public String getProcGUBUN() {
+        return procGUBUN;
+    }
     public String getTitle() {
         return title;
+    }
+    public void setProcGUBUN(String procGUBUN) {
+        this.procGUBUN = procGUBUN;
     }
     public void setTitle(String title) {
         this.title = title;
@@ -130,27 +127,27 @@ public class AucPayment {
     public Long getSellerId() {
         return sellerId;
     }
+
+    public String getPaymentReqYN() {
+        return paymentReqYN;
+    }
+    public void setPaymentReqYN(String paymentReqYN) {
+        this.paymentReqYN = paymentReqYN;
+    }
     public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
-    }
-
-    public String getPaymentReq_YN() {
-        return paymentReq_YN;
-    }
-    public void setPaymentReq_YN(String paymentReq_YN) {
-        this.paymentReq_YN = paymentReq_YN;
     }
 
     public String getPaymentGubun() {
         return paymentGubun;
     }
+    public String getPaymentResult() {
+        return paymentResult;
+    }
     public void setPaymentGubun(String paymentGubun) {
         this.paymentGubun = paymentGubun;
     }
 
-    public String getPaymentResult() {
-        return paymentResult;
-    }
     public void setPaymentResult(String paymentResult) {
         this.paymentResult = paymentResult;
     }

@@ -5,13 +5,15 @@ import com.example.auction.AbstractEvent;
 public class BeAuctioned extends AbstractEvent {
 
     private Long aucId;
-    private Long aucPostId;
+
     private String status;
-    private Long auctioned_mem_id;
-    private String beAuctioned_date;
-    private Long beAuctioned_amount;
-    private String proc_GUBUN;
     private Long bidId;
+    private Long auctionedMemId;
+    private Long aucPostId;
+    private String beAuctionedDate;
+    private String procGUBUN;
+    private Long beAuctionedAmount;
+
 
 
 
@@ -22,56 +24,53 @@ public class BeAuctioned extends AbstractEvent {
     public Long getAucId() {
         return aucId;
     }
+    public void setBidId(Long bidId) {
+        this.bidId = bidId;
+    }
     public void setAucId(Long aucId) {
         this.aucId = aucId;
     }
-
+    public String getBeAuctionedDate() {
+        return beAuctionedDate;
+    }
     public Long getAucPostId() {
         return aucPostId;
     }
-    public void setAucPostId(Long aucPostId) {
-        this.aucPostId = aucPostId;
-    }
-
     public String getStatus() {
         return status;
     }
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public Long getAuctioned_mem_id() {
-        return auctioned_mem_id;
-    }
-    public void setAuctioned_mem_id(Long auctioned_mem_id) {
-        this.auctioned_mem_id = auctioned_mem_id;
+    public void setAucPostId(Long aucPostId) {
+        this.aucPostId = aucPostId;
     }
 
-    public String getBeAuctioned_date() {
-        return beAuctioned_date;
+    public Long getAuctionedMemId() {
+        return auctionedMemId;
     }
-    public void setBeAuctioned_date(String beAuctioned_date) {
-        this.beAuctioned_date = beAuctioned_date;
+    public void setAuctionedMemId(Long auctionedMemId) {
+        this.auctionedMemId = auctionedMemId;
     }
-
-    public Long getBeAuctioned_amount() {
-        return beAuctioned_amount;
-    }
-    public void setBeAuctioned_amount(Long beAuctioned_amount) {
-        this.beAuctioned_amount = beAuctioned_amount;
+    public Long getBeAuctionedAmount() {
+        return beAuctionedAmount;
     }
 
-    public String getProc_GUBUN() {
-        return proc_GUBUN;
+    public void setBeAuctionedDate(String beAuctionedDate) {
+        this.beAuctionedDate = beAuctionedDate;
     }
-    public void setProc_GUBUN(String proc_GUBUN) {
-        this.proc_GUBUN = proc_GUBUN;
+    public void setProcGUBUN(String procGUBUN) {
+        this.procGUBUN = procGUBUN;
     }
 
+    public void setBeAuctionedAmount(Long beAuctionedAmount) {
+        this.beAuctionedAmount = beAuctionedAmount;
+    }
+    public String getProcGUBUN() {
+        return procGUBUN;
+    }
     public Long getBidId() {
         return bidId;
     }
-    public void setBidId(Long bidId) {
-        this.bidId = bidId;
-    }
+
 }

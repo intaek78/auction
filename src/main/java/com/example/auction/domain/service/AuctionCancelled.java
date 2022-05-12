@@ -6,11 +6,11 @@ public class AuctionCancelled extends AbstractEvent {
 
     private Long aucId;
     private Long aucPostId;
-    private String status;
-    private Long auctioned_mem_id;
-    private String proc_GUBUN;
-
     private Long sellerId;
+    private String status;
+    private String procGUBUN;
+    private Long auctionedMemId;
+
 
     public AuctionCancelled(){
         super();
@@ -23,11 +23,18 @@ public class AuctionCancelled extends AbstractEvent {
         this.aucId = aucId;
     }
 
-    public Long getAucPostId() {
-        return aucPostId;
+    public String getProcGUBUN() {
+        return procGUBUN;
     }
-    public void setAucPostId(Long aucPostId) {
-        this.aucPostId = aucPostId;
+    public void setProcGUBUN(String procGUBUN) {
+        this.procGUBUN = procGUBUN;
+    }
+
+    public Long getSellerId() {
+        return sellerId;
+    }
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
     }
 
     public String getStatus() {
@@ -37,24 +44,23 @@ public class AuctionCancelled extends AbstractEvent {
         this.status = status;
     }
 
-    public Long getAuctioned_mem_id() {
-        return auctioned_mem_id;
+    public Long getAucPostId() {
+        return aucPostId;
     }
-    public void setAuctioned_mem_id(Long auctioned_mem_id) {
-        this.auctioned_mem_id = auctioned_mem_id;
-    }
-
-    public String getProc_GUBUN() {
-        return proc_GUBUN;
-    }
-    public void setProc_GUBUN(String proc_GUBUN) {
-        this.proc_GUBUN = proc_GUBUN;
+    public void setAucPostId(Long aucPostId) {
+        this.aucPostId = aucPostId;
     }
 
-    public Long getSellerId() {
-        return sellerId;
+    public Long getAuctionedMemId() {
+        return auctionedMemId;
     }
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
+    public void setAuctionedMemId(Long auctionedMemId) {
+        this.auctionedMemId = auctionedMemId;
     }
+
+
+
+
+
+
 }

@@ -18,21 +18,21 @@ public class Payment {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long bidId;
     private Long bidId2;
-    private Long bid_mem_id;
+    private String paymentResult;
+    private Long bidMemId;
     private Long amount;
-    private String crt_date;
-    private String upt_date;
-    private String beAuctioned_date;
-    private String beAuctioned_YN;
-    private String paymentReq_YN;
-    private String proc_GUBUN;
+    private String crtDate;
+    private String beAuctionedYN;
+    private String uptDate;
+    private String paymentGubun;
+    private String beAuctionedDate;
+    private String paymentReqYN;
+    private String procGUBUN;
     private String postTitle;
+    private String postGubun;
     private Long seller;
     private Long buyer;
-    private String paymentGubun;
-    private String postGubun;
 
-    private String paymentResult;
 
     @PostPersist
     public void onPostPersist(){
@@ -55,18 +55,18 @@ public class Payment {
         this.aucId = aucId;
     }
 
+    public String getPaymentResult() {
+        return paymentResult;
+    }
+    public void setPaymentResult(String paymentResult) {
+        this.paymentResult = paymentResult;
+    }
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getBidId2() {
-        return bidId2;
-    }
-    public void setBidId2(Long bidId2) {
-        this.bidId2 = bidId2;
     }
 
     public Long getPostId() {
@@ -76,18 +76,11 @@ public class Payment {
         this.postId = postId;
     }
 
-    public Long getBidId() {
-        return bidId;
+    public Long getBidId2() {
+        return bidId2;
     }
-    public void setBidId(Long bidId) {
-        this.bidId = bidId;
-    }
-
-    public Long getBid_mem_id() {
-        return bid_mem_id;
-    }
-    public void setBid_mem_id(Long bid_mem_id) {
-        this.bid_mem_id = bid_mem_id;
+    public void setBidId2(Long bidId2) {
+        this.bidId2 = bidId2;
     }
 
     public Long getAmount() {
@@ -97,39 +90,39 @@ public class Payment {
         this.amount = amount;
     }
 
-    public String getCrt_date() {
-        return crt_date;
+    public Long getBidId() {
+        return bidId;
     }
-    public void setCrt_date(String crt_date) {
-        this.crt_date = crt_date;
-    }
-
-    public String getUpt_date() {
-        return upt_date;
-    }
-    public void setUpt_date(String upt_date) {
-        this.upt_date = upt_date;
+    public void setBidId(Long bidId) {
+        this.bidId = bidId;
     }
 
-    public String getBeAuctioned_date() {
-        return beAuctioned_date;
+    public Long getBidMemId() {
+        return bidMemId;
     }
-    public void setBeAuctioned_date(String beAuctioned_date) {
-        this.beAuctioned_date = beAuctioned_date;
-    }
-
-    public String getBeAuctioned_YN() {
-        return beAuctioned_YN;
-    }
-    public void setBeAuctioned_YN(String beAuctioned_YN) {
-        this.beAuctioned_YN = beAuctioned_YN;
+    public void setBidMemId(Long bidMemId) {
+        this.bidMemId = bidMemId;
     }
 
-    public String getProc_GUBUN() {
-        return proc_GUBUN;
+    public String getBeAuctionedDate() {
+        return beAuctionedDate;
     }
-    public void setProc_GUBUN(String proc_GUBUN) {
-        this.proc_GUBUN = proc_GUBUN;
+    public void setBeAuctionedDate(String beAuctionedDate) {
+        this.beAuctionedDate = beAuctionedDate;
+    }
+
+    public String getCrtDate() {
+        return crtDate;
+    }
+    public void setCrtDate(String crtDate) {
+        this.crtDate = crtDate;
+    }
+
+    public String getUptDate() {
+        return uptDate;
+    }
+    public void setUptDate(String uptDate) {
+        this.uptDate = uptDate;
     }
 
     public String getPostTitle() {
@@ -137,6 +130,27 @@ public class Payment {
     }
     public void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
+    }
+
+    public String getBeAuctionedYN() {
+        return beAuctionedYN;
+    }
+    public void setBeAuctionedYN(String beAuctionedYN) {
+        this.beAuctionedYN = beAuctionedYN;
+    }
+
+    public String getProcGUBUN() {
+        return procGUBUN;
+    }
+    public void setProcGUBUN(String procGUBUN) {
+        this.procGUBUN = procGUBUN;
+    }
+
+    public String getPaymentReqYN() {
+        return paymentReqYN;
+    }
+    public void setPaymentReqYN(String paymentReqYN) {
+        this.paymentReqYN = paymentReqYN;
     }
 
     public Long getSeller() {
@@ -153,11 +167,11 @@ public class Payment {
         this.buyer = buyer;
     }
 
-    public String getPaymentReq_YN() {
-        return paymentReq_YN;
+    public String getPostGubun() {
+        return postGubun;
     }
-    public void setPaymentReq_YN(String paymentReq_YN) {
-        this.paymentReq_YN = paymentReq_YN;
+    public void setPostGubun(String postGubun) {
+        this.postGubun = postGubun;
     }
 
     public String getPaymentGubun() {
@@ -167,19 +181,9 @@ public class Payment {
         this.paymentGubun = paymentGubun;
     }
 
-    public String getPostGubun() {
-        return postGubun;
-    }
-    public void setPostGubun(String postGubun) {
-        this.postGubun = postGubun;
-    }
 
-    public String getPaymentResult() {
-        return paymentResult;
-    }
-    public void setPaymentResult(String paymentResult) {
-        this.paymentResult = paymentResult;
-    }
+
+
 
 
 

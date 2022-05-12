@@ -24,29 +24,27 @@ public class KafkaSubscriber {
 
     //결제요청/취소 응답
     @StreamListener(KafkaProcessor.PAYMENT_INPUT)
-    public void wheneverPaymentResulted_(@Payload Payment payment){
-        System.out.println("????????????????Receive PaymentResult?????????????????");
-        System.out.println("kafka Subscriber string==> " + payment.getPaymentResult());
+    public void wheneverPaymentResulted(@Payload Payment payment){
+        log.info("????????????????Receive PaymentResult?????????????????");
+        log.info("kafka Subscriber string==> " + payment.getPaymentResult());
         List<Auction> auctionList = auctionRepository.findByAucPostId(payment.getPostId());
+        String appro = " APPROVED";
+        String rejec = " REJECTED";
         for(Auction auction:auctionList){
             if(payment.getPaymentGubun().equals("REQUEST_PAYMENT")&&payment.getPaymentResult().equals("APPROVED")){
-                auction.setStatus(payment.getPaymentGubun() + " APPROVED");
-                auction.setProc_GUBUN("PAYMENT END");
-                auction.setPaymentReq_YN("Y");
-                System.out.println("APPROVED==>" + payment.getPaymentGubun() + " APPROVED");
+                auction.setStatus(payment.getPaymentGubun() + appro);
+                auction.setProcGUBUN("PAYMENT END");
+                auction.setPaymentReqYN("Y");
             }else if(payment.getPaymentGubun().equals("REQUEST_PAYMENT")&&payment.getPaymentResult().equals("REJECTED")){
-                auction.setStatus(payment.getPaymentGubun() + " REJECTED");
-                auction.setProc_GUBUN("PAYMENT REJECT");
-                System.out.println("REJECTED==>" + payment.getPaymentGubun() + " REJECTED");
+                auction.setStatus(payment.getPaymentGubun() + rejec);
+                auction.setProcGUBUN("PAYMENT REJECT");
             }else if(payment.getPaymentGubun().equals("CANCEL_PAYMENT")&&payment.getPaymentResult().equals("APPROVED")){
-                auction.setStatus(payment.getPaymentGubun() + " APPROVED");
-                auction.setProc_GUBUN("PAYMENT CANCELED");
-                auction.setPaymentReq_YN("N"); //다시 결제요청할 수 있도록
-                System.out.println("APPROVED==>" + payment.getPaymentGubun() + " APPROVED");
+                auction.setStatus(payment.getPaymentGubun() + appro);
+                auction.setProcGUBUN("PAYMENT CANCELED");
+                auction.setPaymentReqYN("N"); //다시 결제요청할 수 있도록
             }else if(payment.getPaymentGubun().equals("CANCEL_PAYMENT")&&payment.getPaymentResult().equals("REJECTED")){
-                auction.setStatus(payment.getPaymentGubun() + " REJECTED");
-                auction.setProc_GUBUN("PAYMENT CANCEL REJECTED");
-                System.out.println("REJECTED==>" + payment.getPaymentGubun() + " REJECTED");
+                auction.setStatus(payment.getPaymentGubun() + rejec);
+                auction.setProcGUBUN("PAYMENT CANCEL REJECTED");
             }
             auctionRepository.save(auction);
         }
@@ -54,8 +52,7 @@ public class KafkaSubscriber {
 
     public Object str2Obj(String str) throws ParseException {
         JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(str);
-        return jsonObject;
+        return parser.parse(str);
     }
 
 }

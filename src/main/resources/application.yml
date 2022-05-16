@@ -49,6 +49,9 @@ spring:
           destination: AuctionHistory
           contentType: application/json
 
+logging:
+  config: classpath:logback-spring.xml
+
 api:
   auction:
     url: http://localhost:8080

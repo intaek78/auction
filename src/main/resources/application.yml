@@ -71,12 +71,19 @@ spring:
 #    password: twopro
      username: root
      password: 1235
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
   cloud:
     stream:
       kafka:
         binder:
           brokers: my-kafka.kafka.svc.cluster.local:9092
-          replicationFactor: 1
+          replication-Factor: -1
+          auto-create-topics: true
         streams:
           binder:
             configuration:

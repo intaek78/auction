@@ -76,6 +76,7 @@ spring:
       kafka:
         binder:
           brokers: my-kafka.kafka.svc.cluster.local:9092
+          replicationFactor: 1
         streams:
           binder:
             configuration:

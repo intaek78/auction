@@ -83,7 +83,7 @@ spring:
         binder:
           brokers: my-kafka.kafka.svc.cluster.local:9092
           replication-Factor: -1
-          auto-create-topics: true
+#          auto-create-topics: true
         streams:
           binder:
             configuration:

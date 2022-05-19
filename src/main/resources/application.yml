@@ -93,10 +93,19 @@ spring:
                 value:
                   serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
-        event-in:
+        auction-in:
           group: auction
           destination: auction
           contentType: application/json
-        event-out:
+        auction-out:
           destination: auction
+          contentType: application/json
+        payment-out:
+          destination: PaymentRequest
+          contentType: application/json
+        payment-in:
+          destination: PaymentResult
+          contentType: application/json
+        history-out:
+          destination: AuctionHistory
           contentType: application/json

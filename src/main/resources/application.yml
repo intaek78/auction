@@ -77,7 +77,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-    defer-datasource-initialization: true
+#    defer-datasource-initialization: true
   cloud:
     stream:
       kafka:

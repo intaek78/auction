@@ -77,14 +77,15 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+    defer-datasource-initialization: true
   cloud:
     stream:
       kafka:
         binder:
-#          brokers: my-kafka.kafka.svc.cluster.local:9092
-          brokers: 10.103.69.141:9092
+          brokers: my-kafka.kafka.svc.cluster.local:9092
+#          brokers: 10.103.69.141:9092
           replication-factor: 1
-          auto-create-topics: true
+#          auto-create-topics: true
         streams:
           binder:
             configuration:

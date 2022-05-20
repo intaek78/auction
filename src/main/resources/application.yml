@@ -65,12 +65,12 @@ spring:
       base-path: /auction
   datasource:
 #    url: jdbc:mariadb://awesome-shopping-db-mariadb.edu-common:3306/auction
-     url: jdbc:mariadb://10.103.129.195:3306/auction
-     driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://10.103.129.195:3306/auction
+    driver-class-name: org.mariadb.jdbc.Driver
 #    username: twopro
 #    password: twopro
-     username: root
-     password: 1235
+    username: root
+    password: 1235
   jpa:
     open-in-view: false
     generate-ddl: true

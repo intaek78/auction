@@ -4,7 +4,7 @@
         <encoder> <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern>
         </encoder> </appender> <!-- Logstash -->
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>10.102.88.54:4560</destination>
+        <destination>10.97.235.41:4560</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"appname":"appname","profile":"local"}</customFields>
         </encoder> </appender> <root level="info">

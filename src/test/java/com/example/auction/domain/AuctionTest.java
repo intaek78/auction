@@ -63,10 +63,9 @@ class AuctionTest {
     void onPostUpdate() {
         AucPayment aucPayment = new AucPayment();
         aucPayment.setAucPostId(Long.parseLong("9999"));
-        assumeTrue(() ->
-                aucPayment.getAucPostId().equals(9999)
-        );
-          aucPaymentRepository.save(aucPayment);
+        if(aucPayment.getAucPostId().equals(9999)) {
+            aucPayment.getAucPostId().equals(9999);
+        }
 
     }
 

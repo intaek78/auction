@@ -46,11 +46,6 @@ public class Bid{
 
     }
 
-    @PostUpdate
-    public void onPostUpdate(){
-        log.info("==========%%%%%%%%%%%%Bid PostUpdate start=========");
-    }
-
     public Long getAucId() {
         return aucId;
     }

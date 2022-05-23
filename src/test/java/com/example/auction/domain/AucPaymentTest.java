@@ -34,6 +34,7 @@ class AucPaymentTest {
         aucPayment.setUptDate("20220606");
         aucPayment.setPaymentGubun("AUCTION");
         aucPayment.setPaymentResult("approve");
+        aucPayment.setPaymentResult("approve");
 
         // when
         AucPayment saveAucPayment = aucPaymentRepository.save(aucPayment);

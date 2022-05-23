@@ -70,6 +70,7 @@ public class Auction {
             auctionCompleted.publishAfterCommit();
         }
 
+
     }
 
     @PreRemove

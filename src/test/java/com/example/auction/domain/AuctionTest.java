@@ -61,11 +61,11 @@ class AuctionTest {
 
     @Test
     void onPostUpdate() {
-        AucPayment aucPayment = new AucPayment();
-        aucPayment.setAucPostId(Long.parseLong("9999"));
-        if(aucPayment.getAucPostId().equals(9999)) {
-            aucPayment.getAucPostId().equals(9999);
-        }
+        Auction auction = new Auction();
+        auction.setAucPostId(Long.parseLong("9999"));
+        Auction saveAuction = auctionRepository.save(auction);
+        auction.onPostUpdate();
+        Assertions.assertThat(auction.getAucPostId()).isEqualTo(saveAuction.getAucPostId());
 
     }
 

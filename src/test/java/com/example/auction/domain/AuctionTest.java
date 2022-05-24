@@ -2,8 +2,12 @@ package com.example.auction.domain;
 
 import com.example.auction.domain.repository.AucPaymentRepository;
 import com.example.auction.domain.repository.AuctionRepository;
+import com.example.auction.domain.service.AucRegisterd;
+import com.example.auction.domain.service.AuctionCancelled;
+import com.example.auction.domain.service.AuctionCompleted;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -57,20 +61,49 @@ class AuctionTest {
         Assertions.assertThat(saveAuction.getAucEndDate()).isNotNull();
         Assertions.assertThat(saveAuction.getPaymentReqYN()).isNotNull();
         Assertions.assertThat(saveAuction.getAucStartDate()).isNotNull();
+
+        AucRegisterd aucRegisterd = new AucRegisterd();
+        BeanUtils.copyProperties(this, aucRegisterd);
+
+        saveAuction.setProcGUBUN("PAYMENT REJECT");
+        if(saveAuction.getProcGUBUN().equals("PAYMENT REJECT")){
+            aucRegisterd.publishAfterCommit();
+        }else{
+            AuctionCompleted auctionCompleted = new AuctionCompleted();
+            BeanUtils.copyProperties(saveAuction, auctionCompleted);
+            auctionCompleted.publishAfterCommit();
+        }
     }
 
     @Test
     void onPostUpdate() {
         Auction auction = new Auction();
         auction.setAucPostId(Long.parseLong("9999"));
+        auction.setProcGUBUN("PAYMENT CANCELED");
         Auction saveAuction = auctionRepository.save(auction);
         auction.onPostUpdate();
         Assertions.assertThat(auction.getAucPostId()).isEqualTo(saveAuction.getAucPostId());
+        Assertions.assertThat(auction.getProcGUBUN()).isEqualTo(saveAuction.getProcGUBUN());
+
+
+        AuctionCancelled auctionCancelled = new AuctionCancelled();
+        AuctionCompleted auctionCompleted = new AuctionCompleted();
+        if(saveAuction.getProcGUBUN().equals("PAYMENT CANCELED")){
+            auctionCancelled.publishAfterCommit();
+        }else{
+            auctionCompleted.publishAfterCommit();
+        }
+
 
     }
 
     @Test
     void onPreRemove() {
+        Auction auction = new Auction();
+        auction.setAucPostId(Long.parseLong("9999"));
+        Auction saveAuction = auctionRepository.save(auction);
+        auction.onPreRemove();
+        Assertions.assertThat(auction.getAucPostId()).isEqualTo(saveAuction.getAucPostId());
 
     }
 }

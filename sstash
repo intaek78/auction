@@ -9,12 +9,18 @@
 [31m-dashboardUrl=http://localhost:9000/dashboard?id=auction-project[m
 [31m-ceTaskId=AYC2tqeeAfJDf-QmJoBv[m
 [31m-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYC2tqeeAfJDf-QmJoBv[m
-[32m+[m[32mprojectKey=auction-project[m[41m[m
-[32m+[m[32mserverUrl=http://localhost:9000[m[41m[m
-[32m+[m[32mserverVersion=9.4.0.54424[m[41m[m
-[32m+[m[32mdashboardUrl=http://localhost:9000/dashboard?id=auction-project[m[41m[m
-[32m+[m[32mceTaskId=AYC2tqeeAfJDf-QmJoBv[m[41m[m
-[32m+[m[32mceTaskUrl=http://localhost:9000/api/ce/task?id=AYC2tqeeAfJDf-QmJoBv[m[41m[m
+[32m+[m[32mprojectKey=auction-project[m[41m
+[m
+[32m+[m[32mserverUrl=http://localhost:9000[m[41m
+[m
+[32m+[m[32mserverVersion=9.4.0.54424[m[41m
+[m
+[32m+[m[32mdashboardUrl=http://localhost:9000/dashboard?id=auction-project[m[41m
+[m
+[32m+[m[32mceTaskId=AYC2tqeeAfJDf-QmJoBv[m[41m
+[m
+[32m+[m[32mceTaskUrl=http://localhost:9000/api/ce/task?id=AYC2tqeeAfJDf-QmJoBv[m[41m
+[m
 [1mdiff --git a/log/2022-05-14/base.2022-05-14.log b/log/2022-05-14/base.2022-05-14.log[m
 [1mindex 39d8ae8..24fb92a 100644[m
 [1m--- a/log/2022-05-14/base.2022-05-14.log[m

@@ -28,6 +28,8 @@ public class AucPayment {
     private String procGUBUN;
     private String paymentGubun;
     private String paymentResult;
+    private Long beAuctionedAmount;
+    private Long auctionedMemId;
 
 
 
@@ -152,7 +154,19 @@ public class AucPayment {
         this.paymentResult = paymentResult;
     }
 
+    public Long getBeAuctionedAmount() {
+        return beAuctionedAmount;
+    }
+    public void setBeAuctionedAmount(Long beAuctionedAmount) {
+        this.beAuctionedAmount = beAuctionedAmount;
+    }
 
+    public Long getAuctionedMemId() {
+        return auctionedMemId;
+    }
+    public void setAuctionedMemId(Long auctionedMemId) {
+        this.auctionedMemId = auctionedMemId;
+    }
 
 
 }

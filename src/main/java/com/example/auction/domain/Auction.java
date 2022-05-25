@@ -37,6 +37,7 @@ public class Auction {
     private String aucStartDate;
     private Long buyerId;
     private Long sellerId;
+    private String completeYn;
 
 
     @PrePersist
@@ -212,6 +213,13 @@ public class Auction {
     }
     public void setUptDate(String uptDate) {
         this.uptDate = uptDate;
+    }
+
+    public String getCompleteYn() {
+        return completeYn;
+    }
+    public void setCompleteYn(String completeYn) {
+        this.completeYn = completeYn;
     }
 
 

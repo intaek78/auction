@@ -2,16 +2,10 @@ package com.example.auction.domain;
 
 import com.example.auction.domain.repository.AucPaymentRepository;
 import com.example.auction.domain.repository.AuctionRepository;
-import com.example.auction.domain.service.AucRegisterd;
-import com.example.auction.domain.service.AuctionCancelled;
-import com.example.auction.domain.service.AuctionCompleted;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @DataJpaTest
 class AuctionTest {
@@ -46,6 +40,7 @@ class AuctionTest {
         auction.setPaymentReqYN("END");
         auction.setAucStartDate("20220606");
         auction.setUptDate("20220606");
+        auction.setCompleteYn("Y");
         // when
         Auction saveAuction = auctionRepository.save(auction);
         // then
@@ -62,38 +57,22 @@ class AuctionTest {
         Assertions.assertThat(saveAuction.getPaymentReqYN()).isNotNull();
         Assertions.assertThat(saveAuction.getAucStartDate()).isNotNull();
 
-        AucRegisterd aucRegisterd = new AucRegisterd();
-        BeanUtils.copyProperties(this, aucRegisterd);
-
-        saveAuction.setProcGUBUN("PAYMENT REJECT");
         if(saveAuction.getProcGUBUN().equals("PAYMENT REJECT")){
-            aucRegisterd.publishAfterCommit();
-        }else{
-            AuctionCompleted auctionCompleted = new AuctionCompleted();
-            BeanUtils.copyProperties(saveAuction, auctionCompleted);
-            auctionCompleted.publishAfterCommit();
+            Assertions.assertThat(saveAuction.getAucStartAmount()).isNotNull();
         }
+
+
     }
 
     @Test
     void onPostUpdate() {
         Auction auction = new Auction();
         auction.setAucPostId(Long.parseLong("9999"));
-        auction.setProcGUBUN("PAYMENT CANCELED");
+        auction.setProcGUBUN("PAYMENT CANCELED2");
         Auction saveAuction = auctionRepository.save(auction);
         auction.onPostUpdate();
         Assertions.assertThat(auction.getAucPostId()).isEqualTo(saveAuction.getAucPostId());
         Assertions.assertThat(auction.getProcGUBUN()).isEqualTo(saveAuction.getProcGUBUN());
-
-
-        AuctionCancelled auctionCancelled = new AuctionCancelled();
-        AuctionCompleted auctionCompleted = new AuctionCompleted();
-        if(saveAuction.getProcGUBUN().equals("PAYMENT CANCELED")){
-            auctionCancelled.publishAfterCommit();
-        }else{
-            auctionCompleted.publishAfterCommit();
-        }
-
 
     }
 

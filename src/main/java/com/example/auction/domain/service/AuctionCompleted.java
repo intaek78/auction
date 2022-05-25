@@ -7,7 +7,6 @@ public class AuctionCompleted extends AbstractEvent {
     private Long aucId;
     private String procGUBUN;
     private Long aucPostId;
-    private Long auctionedMemId;
     private Long buyerId;
     private String status;
     private Long beAuctionedAmount;
@@ -37,14 +36,8 @@ public class AuctionCompleted extends AbstractEvent {
     public String getStatus() {
         return status;
     }
-    public Long getAuctionedMemId() {
-        return auctionedMemId;
-    }
     public Long getBuyerId() {
         return buyerId;
-    }
-    public void setAuctionedMemId(Long auctionedMemId) {
-        this.auctionedMemId = auctionedMemId;
     }
     public void setBuyerId(Long buyerId) {
         this.buyerId = buyerId;

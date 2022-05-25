@@ -9,7 +9,6 @@ public class AuctionCancelled extends AbstractEvent {
     private Long sellerId;
     private String status;
     private String procGUBUN;
-    private Long auctionedMemId;
 
 
     public AuctionCancelled(){
@@ -49,13 +48,6 @@ public class AuctionCancelled extends AbstractEvent {
     }
     public void setAucPostId(Long aucPostId) {
         this.aucPostId = aucPostId;
-    }
-
-    public Long getAuctionedMemId() {
-        return auctionedMemId;
-    }
-    public void setAuctionedMemId(Long auctionedMemId) {
-        this.auctionedMemId = auctionedMemId;
     }
 
 

@@ -8,7 +8,6 @@ public class AucPaymentRegistered extends AbstractEvent {
     private Long bidId;
     private String paymentResult;
     private Long aucPostId;
-    private String status;
     private String paymentGubun;
     private Long auctionedMemId;
     private String beAuctionedDate;
@@ -54,13 +53,6 @@ public class AucPaymentRegistered extends AbstractEvent {
     }
     public void setPaymentGubun(String paymentGubun) {
         this.paymentGubun = paymentGubun;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Long getAuctionedMemId() {

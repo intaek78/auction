@@ -11,11 +11,11 @@ public class AucRegisterd extends AbstractEvent {
     private String title;
     private String content;
     private String status;
-    private Long aucAmount;
+    private Long aucStartAmount;
     private String payMth;
     private String crtDate;
     private String uptDate;
-    private Long auctionedMemId;
+    private Long buyerId;
     private String completeYn;
 
     public Long getAucId() {
@@ -60,11 +60,11 @@ public class AucRegisterd extends AbstractEvent {
         this.status = status;
     }
 
-    public Long getAucAmount() {
-        return aucAmount;
+    public Long getAucStartAmount() {
+        return aucStartAmount;
     }
-    public void setAucAmount(Long aucAmount) {
-        this.aucAmount = aucAmount;
+    public void setAucStartAmount(Long aucStartAmount) {
+        this.aucStartAmount = aucStartAmount;
     }
 
     public String getPayMth() {
@@ -88,11 +88,11 @@ public class AucRegisterd extends AbstractEvent {
         this.uptDate = uptDate;
     }
 
-    public Long getAuctionedMemId() {
-        return auctionedMemId;
+    public Long getBuyerId() {
+        return buyerId;
     }
-    public void setAuctionedMemId(Long auctionedMemId) {
-        this.auctionedMemId = auctionedMemId;
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
     }
 
     public String getCompleteYn() {

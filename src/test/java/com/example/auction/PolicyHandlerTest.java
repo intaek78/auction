@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,12 +33,13 @@ class PolicyHandlerTest {
 
         Auction auction2 = new Auction();
         auction2.setProcGUBUN("C");
-        auction2.setAucId(Long.parseLong("9999"));
-        auction2.setStatus("test");
+        auction2.setAucPostId(Long.parseLong("111"));
+        auction2.setAucId2(Long.parseLong("9999"));
         Auction auc2 = auctionRepository.save(auction2);
 
         AucPaymentRegistered aucPaymentRegistered = new AucPaymentRegistered();
-        aucPaymentRegistered.setAucId(Long.parseLong("9999"));
+        aucPaymentRegistered.setAucId(auction2.getAucId());
+        aucPaymentRegistered.setAucPostId(Long.parseLong("111"));
         aucPaymentRegistered.setPaymentGubun("END");
         System.out.println("aucPaymentRegistered.getAucId()=> "+aucPaymentRegistered.getAucId());
         System.out.println("auc2 AucId : " + auc2.getAucId());
@@ -45,20 +47,8 @@ class PolicyHandlerTest {
         System.out.println("auc2 Status : " + auc2.getStatus());
 
         auctionRepository.findByAucId((aucPaymentRegistered.getAucId())).ifPresent(auction->{
-            System.out.println("1111111111111");
-            auction.setProcGUBUN("B");
-            System.out.println("2222222222222");
-            auction.setStatus("END");
-            System.out.println("3333333333333");
-            auctionRepository.save(auction);
-            System.out.println("444444444444444444");
+            Assertions.assertThat(auction.getAucPostId()).isEqualTo(aucPaymentRegistered.getAucPostId());
         });
-
-        System.out.println("123123123123123");
-
-        //Optional<Auction> aa3 = auctionRepository.findByAucId(Long.parseLong("9999"));
-        //System.out.println(aa3.get().getProcGUBUN());
-        //System.out.println("aucPaymentRegistered.getAucId()==> " + aucPaymentRegistered.getAucId());
 
 
     }

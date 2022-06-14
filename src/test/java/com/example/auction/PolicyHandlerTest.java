@@ -35,21 +35,35 @@ class PolicyHandlerTest {
         auction2.setProcGUBUN("C");
         auction2.setAucPostId(Long.parseLong("111"));
         auction2.setAucId2(Long.parseLong("9999"));
+        auction2.setStatus("TEST");
         Auction auc2 = auctionRepository.save(auction2);
 
+        Optional<Auction> aucTmp = auctionRepository.findByAucId(Long.parseLong("10"));
+
+        if(aucTmp.isPresent()){
+            Auction auction = aucTmp.get();
+            Assertions.assertThat(auction.getAucPostId()).isEqualTo(auction2.getAucPostId());
+            Assertions.assertThat(auction.getStatus()).isEqualTo(auction2.getStatus());
+            Assertions.assertThat(auction.getProcGUBUN()).isEqualTo(auction2.getProcGUBUN());
+            System.out.println("auction getStatus=====>>>"+auction.getStatus());
+        }
+        /*
         AucPaymentRegistered aucPaymentRegistered = new AucPaymentRegistered();
         aucPaymentRegistered.setAucId(auction2.getAucId());
         aucPaymentRegistered.setAucPostId(Long.parseLong("111"));
-        aucPaymentRegistered.setPaymentGubun("END");
+        aucPaymentRegistered.setProcGUBUN("END");
         System.out.println("aucPaymentRegistered.getAucId()=> "+aucPaymentRegistered.getAucId());
         System.out.println("auc2 AucId : " + auc2.getAucId());
         System.out.println("auc2 ProcGUBUN : " + auc2.getProcGUBUN());
         System.out.println("auc2 Status : " + auc2.getStatus());
 
         auctionRepository.findByAucId((aucPaymentRegistered.getAucId())).ifPresent(auction->{
+            //auction.setProcGUBUN(aucPaymentRegistered.getProcGUBUN());
+            //auction.setStatus("DID");
             Assertions.assertThat(auction.getAucPostId()).isEqualTo(aucPaymentRegistered.getAucPostId());
+            Assertions.assertThat(auction.getAucId()).isEqualTo(aucPaymentRegistered.getAucId());
         });
-
+        */
 
     }
 

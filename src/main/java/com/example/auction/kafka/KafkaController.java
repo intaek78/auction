@@ -46,10 +46,20 @@ public class KafkaController {
         kafkaPublisher.sendAucPostJson(str2Obj(auction));
     }
 
+    @PostMapping("/auction/userpush")
+    public void pushJsonUser(@RequestBody String auction) throws ParseException {
+        log.info("전송 : {}", auction);
+        log.info("sendUserRequest  "+ str2Obj(auction));
+
+        kafkaPublisher.sendUserAuctionJson(str2Obj(auction));
+    }
+
 
     public Object str2Obj(String str) throws ParseException {
         JSONParser parser = new JSONParser();
         return parser.parse(str);
     }
+
+
 
 }

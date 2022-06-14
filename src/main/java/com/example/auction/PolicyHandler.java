@@ -47,38 +47,38 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverBidRegisted(@Payload Bidden bidden){
 
-        //if(bidden.isMe()){
+        if(bidden.isMe()){
 
             auctionRepository.findByAucId((bidden.getAucId())).ifPresent(auction->{
                 auction.setProcGUBUN("B");
                 auction.setStatus("<입찰> Buyer:" + bidden.getBidMemId() + ", 금액:" + bidden.getBidAmount());
                 auctionRepository.save(auction);
             });
-        //}
+        }
     }
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverBidRegisted2(@Payload Bidden bidden2){
 
-        //if(bidden2.isMe()){
+        if(bidden2.isMe()){
             bidRepository.findByBidId((bidden2.getBidId())).ifPresent(bid->{
                 bid.setBidId2(bidden2.getBidId());
                 bidRepository.save(bid);
             });
-        //}
+        }
     }
 
 
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverAucRegistered(@Payload AucRegisterd aucRegisterd) {
-        //if (aucRegisterd.isMe()) {
+        if (aucRegisterd.isMe()) {
             auctionRepository.findByAucId((aucRegisterd.getAucId())).ifPresent(auction -> {
                 auction.setAucId2(aucRegisterd.getAucId()); //임시
                 auctionRepository.save(auction);
             });
 
-        //}
+        }
     }
 
     //경매글 입력
@@ -135,6 +135,10 @@ public class PolicyHandler{
                     auction.setStatus("판매종료");
                     auction.setProcGUBUN("E");
                     auction.setPaymentReqYN("E");
+                }else if(aucPaymentRegistered.getPaymentGubun().equals("RATE_COMPLETED")){
+                    auction.setStatus("평가완료");
+                    auction.setProcGUBUN("RE");
+                    auction.setPaymentReqYN("RE");
                 }
                 auctionRepository.save(auction);
             });

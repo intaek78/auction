@@ -60,6 +60,15 @@ public class KafkaPublisher {
         );
     }
 
+    public void sendUserAuctionJson(Object auction) {
+        String message = jacksonUtil.obj2Str(auction);
+        kafkaProcessor.userOutboundTopic().send(
+                MessageBuilder.withPayload(message)
+                        .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+                        .build()
+        );
+    }
+
 
 }
 

@@ -27,4 +27,12 @@ public interface KafkaProcessor {
 
     @Output(OUTPUT)
     MessageChannel outboundTopic();
+
+    String USER_OUTPUT = "user-out";
+    String USER_INPUT = "user-in";
+    @Output(USER_OUTPUT)
+    MessageChannel userOutboundTopic();
+
+    @Input(USER_INPUT)
+    MessageChannel userInboundTopic();
 }

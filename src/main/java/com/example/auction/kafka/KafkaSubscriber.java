@@ -50,6 +50,7 @@ public class KafkaSubscriber {
         }
     }
 
+
     public Object str2Obj(String str) throws ParseException {
         JSONParser parser = new JSONParser();
         return parser.parse(str);

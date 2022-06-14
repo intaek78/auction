@@ -48,6 +48,12 @@ spring:
         history-out:
           destination: AuctionHistory
           contentType: application/json
+        user-out:
+          destination: UserRequest
+          contentType: application/json
+        user-in:
+          destination: UserResult
+          contentType: application/json
 
 logging:
   config: classpath:logback-spring.xml
@@ -110,4 +116,10 @@ spring:
           contentType: application/json
         history-out:
           destination: AuctionHistory
+          contentType: application/json
+        user-out:
+          destination: UserRequest
+          contentType: application/json
+        user-in:
+          destination: UserResult
           contentType: application/json

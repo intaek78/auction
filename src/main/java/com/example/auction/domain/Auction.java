@@ -220,7 +220,7 @@ public class Auction {
     }
     public void setCompleteYn(String completeYn) {
         this.completeYn = completeYn;
-    }
+    } 
 
 
 

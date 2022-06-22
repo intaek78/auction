@@ -58,6 +58,11 @@ spring:
 logging:
   config: classpath:logback-spring.xml
 
+  spring:
+    zipkin:
+      #base-url: http://amdp-zipkin.hrd-edu.cloudzcp.com
+      base-url: localhost:9411
+
 api:
   auction:
     url: http://localhost:8080

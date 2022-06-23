@@ -22,13 +22,11 @@ public class KafkaController {
 
     @GetMapping("/push/{message}")
     public void pushTest(@PathVariable String message) {
-        log.info("전송 : {}", message);
         kafkaPublisher.sendAuctionString(message);
     }
 
     @PostMapping("/auction/push")
     public void pushJsonTest(@RequestBody String auction) throws ParseException {
-        log.info("전송 : {}", auction);
         log.info("sendPaymentRequest  "+ str2Obj(auction));
 
         kafkaPublisher.sendAuctionJson(str2Obj(auction));
@@ -48,7 +46,7 @@ public class KafkaController {
 
     @PostMapping("/auction/userpush")
     public void pushJsonUser(@RequestBody String auction) throws ParseException {
-        log.info("전송 : {}", auction);
+        log.info("send : {}", auction);
         log.info("sendUserRequest  "+ str2Obj(auction));
 
         kafkaPublisher.sendUserAuctionJson(str2Obj(auction));

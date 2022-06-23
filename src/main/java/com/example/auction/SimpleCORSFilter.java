@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
     HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response = (HttpServletResponse) res;
     response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-    //response.setHeader("Access-Control-Allow-Origin", request.getHeader("*"));
     response.setHeader("Access-Control-Allow-Credentials", "true");
     response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
     response.setHeader("Access-Control-Max-Age", "3600");

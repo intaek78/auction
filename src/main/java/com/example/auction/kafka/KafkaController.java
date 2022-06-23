@@ -2,16 +2,24 @@ package com.example.auction.kafka;
 
 import com.example.auction.domain.AucPayment;
 import com.example.auction.domain.Auction;
+import com.example.auction.domain.Payment;
 import com.example.auction.domain.service.AucPaymentRegistered;
 import com.example.auction.domain.service.AucRegisterd;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
@@ -19,6 +27,8 @@ import org.json.simple.parser.ParseException;
 public class KafkaController {
 
     private final KafkaPublisher kafkaPublisher;
+
+    private WebClient webClient = WebClient.builder().baseUrl("http://localhost:8085").build();
 
     @GetMapping("/push/{message}")
     public void pushTest(@PathVariable String message) {
@@ -56,6 +66,29 @@ public class KafkaController {
     public Object str2Obj(String str) throws ParseException {
         JSONParser parser = new JSONParser();
         return parser.parse(str);
+    }
+
+    //Hystrix Test(로컬테스트용)
+    @PostMapping("/auction/pushHystrix")
+    @HystrixCommand(fallbackMethod = "getHystrixFallback")
+    public Payment pushJsonHystrix(@RequestBody String auction) throws ParseException {
+        log.info("sendHystrixRequest : {}", str2Obj(auction));
+
+
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+        formData.add("postTitle", "Hystrix Title");
+        return webClient.post()
+                .uri("/payments")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(str2Obj(auction))
+                .retrieve()
+                .bodyToMono(Payment.class)
+                .block();
+    }
+
+    private Payment getHystrixFallback(@RequestBody String auction) {
+        log.info("Circuit Breaker Opened");
+        return null;
     }
 
 

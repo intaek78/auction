@@ -28,7 +28,8 @@ public class KafkaController {
 
     private final KafkaPublisher kafkaPublisher;
 
-    private WebClient webClient = WebClient.builder().baseUrl("http://localhost:8085").build();
+    //private WebClient webClient = WebClient.builder().baseUrl("http://localhost:8085").build();
+    private WebClient webClient = WebClient.builder().baseUrl("http://192.168.72.103:8085").build();
 
     @GetMapping("/push/{message}")
     public void pushTest(@PathVariable String message) {
